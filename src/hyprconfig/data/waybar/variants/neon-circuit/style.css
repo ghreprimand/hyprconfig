@@ -1,0 +1,282 @@
+/* HyprConfig Waybar — Neon Circuit variant
+ * Based on JaKooLit/Hyprland-Dots "[Extra] Neon Circuit" by Krautt
+ * (https://github.com/JaKooLit/Hyprland-Dots)
+ * Asymmetric cut-corner borders per module group, circuit-board look.
+ * Each section has a unique border color and diagonal cut corners. */
+
+@define-color bar-bg rgba(0, 0, 0, 0);
+@define-color main-bg #313244;
+@define-color main-fg #b4befe;
+@define-color wb-act-bg #b4befe;
+@define-color wb-act-fg #1e1e2e;
+@define-color wb-hvr-bg #f5c2e7;
+@define-color wb-hvr-fg #313244;
+
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-weight: bold;
+    min-height: 0;
+    font-size: 14px;
+}
+
+window#waybar {
+    background: @bar-bg;
+}
+
+tooltip {
+    background: @main-bg;
+    color: @main-fg;
+    border-radius: 12px;
+    border-width: 0px;
+}
+
+/* ===== WORKSPACES ===== */
+#workspaces {
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #b4befe;
+    background: @main-bg;
+    padding: 0 8px;
+    margin: 3px 5px 3px 0;
+}
+
+#workspaces button {
+    box-shadow: none;
+    text-shadow: none;
+    padding: 2px 6px;
+    border-radius: 10px;
+    color: @wb-act-fg;
+    background-color: #b4befe;
+    transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button.active {
+    background-image: linear-gradient(45deg, #89b4fa 50%, #cba6f7 50%);
+    color: @wb-act-fg;
+    border-radius: 12px;
+    padding: 2px 12px;
+    margin: 2px 4px;
+}
+
+#workspaces button:hover {
+    background: @wb-hvr-bg;
+    color: @wb-hvr-fg;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+/* ===== BASE MODULE STYLE ===== */
+#custom-logo,
+#taskbar,
+#window,
+#mpris,
+#idle_inhibitor,
+#clock,
+#temperature,
+#cpu,
+#memory,
+#custom-gpu,
+#network,
+#pulseaudio,
+#tray,
+#custom-power {
+    color: @main-fg;
+    background: @main-bg;
+    opacity: 1;
+    margin: 3px 0;
+    padding: 0 4px;
+}
+
+/* ===== LOGO ===== */
+#custom-logo {
+    font-size: 18px;
+    padding: 0 10px;
+    color: #89b4fa;
+    border-radius: 12px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #89b4fa;
+    margin: 3px 5px 3px 5px;
+}
+
+/* ===== TASKBAR ===== */
+#taskbar {
+    padding: 0;
+    color: #b4befe;
+}
+#taskbar button {
+    padding: 0 3px;
+    margin: 0 1px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+}
+#taskbar button.active {
+    background-image: linear-gradient(45deg, #89b4fa 50%, #cba6f7 50%);
+    color: @wb-act-fg;
+    border-radius: 8px;
+}
+
+/* ===== WINDOW TITLE — gradient bg ===== */
+#window {
+    background-image: linear-gradient(45deg, #89b4fa 50%, #cba6f7 50%);
+    color: black;
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-color: #f5e0dc;
+    margin: 3px 5px;
+    padding: 0 10px;
+    font-weight: normal;
+}
+
+/* ===== CLOCK — pink circuit cut ===== */
+#clock {
+    color: #F38BA8;
+    border-radius: 12px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-color: #F38BA8;
+    margin-right: 5px;
+    padding: 0 8px;
+}
+
+/* ===== IDLE INHIBITOR — opposite cut ===== */
+#idle_inhibitor {
+    color: #94e2d5;
+    border-radius: 12px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-style: solid;
+    border-right-style: none;
+    border-width: 2px;
+    border-color: #F38BA8;
+    padding: 0 6px;
+}
+#idle_inhibitor.activated {
+    color: #39FF14;
+}
+
+/* ===== SYSTEM STATS — connected strip ===== */
+#temperature {
+    color: #cdd6f4;
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-style: solid;
+    border-right-style: none;
+    border-width: 2px;
+    border-color: #cdd6f4;
+    margin-left: 5px;
+    padding: 0 6px;
+}
+#temperature.critical {
+    background-color: #ff0000;
+    color: white;
+}
+
+#cpu,
+#memory {
+    color: #cdd6f4;
+    border-radius: 0px;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-width: 2px;
+    border-color: #cdd6f4;
+    padding: 0 6px;
+}
+
+#custom-gpu {
+    color: #cdd6f4;
+    border-radius: 12px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-style: solid;
+    border-left-style: none;
+    border-width: 2px;
+    border-color: #cdd6f4;
+    margin-right: 5px;
+    padding: 0 6px;
+}
+
+#network {
+    border-radius: 12px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-style: solid;
+    border-left-style: none;
+    border-width: 2px;
+    border-color: #cdd6f4;
+    margin-right: 5px;
+    padding: 0 6px;
+}
+
+/* ===== AUDIO — rosewater circuit ===== */
+#pulseaudio {
+    color: #F5E0DC;
+    border-radius: 20px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-style: solid;
+    border-left-style: none;
+    border-width: 2px;
+    border-color: #F5E0DC;
+    padding: 0 8px;
+}
+#pulseaudio.muted {
+    color: red;
+}
+
+/* ===== MEDIA ===== */
+#mpris {
+    padding: 0 8px;
+    font-weight: normal;
+}
+#mpris.paused {
+    color: #585b70;
+}
+
+/* ===== TRAY — lavender circuit ===== */
+#tray {
+    color: #b4befe;
+    border-radius: 12px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-color: #b4befe;
+    margin-left: 5px;
+    padding: 0 8px;
+}
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ===== POWER — pink circuit cut ===== */
+#custom-power {
+    color: #F38BA8;
+    border-radius: 12px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-style: solid;
+    border-left-style: none;
+    border-width: 2px;
+    border-color: #F38BA8;
+    padding: 0 8px;
+    margin-right: 5px;
+    font-size: 16px;
+}

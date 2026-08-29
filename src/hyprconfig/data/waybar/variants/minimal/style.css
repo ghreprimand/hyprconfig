@@ -1,0 +1,256 @@
+/* HyprConfig Waybar — Minimal variant */
+
+
+@import "theme.css";
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* -- Bar chrome -- */
+window#waybar {
+    background: transparent;
+    color: #e0e0e0;
+}
+window#waybar > box {
+    margin: 4px 8px 0 8px;
+    background: #0e0e1c;
+    border: 1px solid alpha(@accent, 0.08);
+    border-bottom: 2px solid alpha(@accent2, 0.35);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.module {
+    padding: 0 8px;
+}
+
+/* -- Logo -- */
+#custom-logo {
+    font-size: 17px;
+    padding: 0 10px;
+    color: @accent2;
+    border-radius: 10px 0 0 10px;
+    transition: color 0.2s ease;
+}
+#custom-logo:hover {
+    color: @accent-hi;
+    background: alpha(@accent2, 0.06);
+}
+
+/* -- Workspaces -- */
+#workspaces {
+    padding: 0 4px;
+}
+#workspaces button {
+    padding: 0 6px;
+    margin: 4px 1px;
+    border-radius: 6px;
+    border: none;
+    color: #444;
+    background: transparent;
+    font-size: 9px;
+    min-width: 16px;
+    transition: all 0.2s ease;
+}
+#workspaces button.active {
+    color: @accent2;
+    background: alpha(@accent2, 0.12);
+    font-weight: 700;
+    font-size: 11px;
+}
+#workspaces button:not(.empty):not(.active) {
+    color: #aaa;
+    font-size: 7px;
+}
+#workspaces button.empty {
+    color: #2a2a40;
+    font-size: 5px;
+}
+#workspaces button:hover {
+    color: @accent2;
+    background: alpha(@accent2, 0.10);
+}
+
+/* -- Taskbar -- */
+#taskbar {
+    padding: 0 2px;
+}
+#taskbar button {
+    padding: 2px 3px;
+    margin: 0 1px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+#taskbar button.active {
+    background: alpha(@accent2, 0.06);
+    box-shadow: 0 1px 0 @accent2;
+}
+
+/* -- Window title -- */
+#window {
+    margin: 0 10px;
+    color: #666;
+    font-weight: normal;
+}
+
+/* -- Vertical separators between groups -- */
+#clock.time,
+#custom-gpu,
+#pulseaudio,
+#network,
+#idle_inhibitor {
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* -- Clock -- */
+#clock.time {
+    color: #e0e0e0;
+    padding: 0 8px;
+    letter-spacing: 0.3px;
+}
+#clock.date {
+    color: #aaa;
+    padding: 0 8px;
+    font-weight: normal;
+}
+
+/* -- GPU -- */
+#custom-gpu {
+    color: #56b6c2;
+    padding: 0 8px;
+}
+#custom-gpu.warning {
+    color: #e5c07b;
+}
+#custom-gpu.critical {
+    color: #e06c75;
+}
+
+/* -- CPU -- */
+#cpu {
+    color: #d19a66;
+    padding: 0 8px;
+}
+#cpu.warning {
+    color: #e5c07b;
+}
+#cpu.critical {
+    color: #e06c75;
+}
+
+/* -- Memory -- */
+#memory {
+    color: #c678dd;
+    padding: 0 8px;
+}
+#memory.warning {
+    color: #e5c07b;
+}
+#memory.critical {
+    color: #e06c75;
+}
+
+/* -- Temperature -- */
+#temperature {
+    color: #e06c75;
+    padding: 0 8px;
+}
+#temperature.critical {
+    color: #ff4060;
+}
+
+/* -- Pulseaudio -- */
+#pulseaudio {
+    color: #98c379;
+    padding: 0 8px;
+}
+#pulseaudio.muted {
+    color: #e06c75;
+}
+
+/* -- Network -- */
+#network {
+    color: #61afef;
+    padding: 0 8px;
+}
+#network.disconnected {
+    color: #666;
+}
+
+/* -- Media -- */
+#mpris {
+    padding: 0 8px;
+    color: #aaa;
+    font-weight: normal;
+}
+#mpris.paused {
+    color: #666;
+}
+
+/* -- System tray -- */
+#tray {
+    padding: 0 8px;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* -- Idle inhibitor -- */
+#idle_inhibitor {
+    color: #666;
+    padding: 0 8px;
+    transition: color 0.2s ease;
+}
+#idle_inhibitor.activated {
+    color: #e5c07b;
+}
+
+/* -- Power -- */
+#custom-power {
+    font-size: 14px;
+    padding: 0 10px;
+    color: @accent2;
+    border-radius: 0 10px 10px 0;
+    transition: all 0.2s ease;
+}
+#custom-power:hover {
+    color: @accent-hi;
+    background: alpha(@accent2, 0.06);
+}
+
+/* -- Hover glow on interactive modules -- */
+#custom-gpu:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover,
+#idle_inhibitor:hover,
+#clock.date:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* -- Tooltip -- */
+tooltip {
+    border: 1px solid alpha(@accent, 0.3);
+    border-radius: 8px;
+    background: rgba(14, 14, 28, 0.95);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+tooltip > box {
+    padding: 0 6px;
+}
+tooltip label {
+    color: #e0e0e0;
+    padding: 3px;
+    font-size: 12px;
+}

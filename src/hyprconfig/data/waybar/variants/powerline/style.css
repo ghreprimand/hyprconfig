@@ -1,0 +1,335 @@
+/* HyprConfig Waybar — Powerline Ribbon v2 */
+
+
+@import "theme.css";
+@keyframes pulse-gold {
+    0%   { box-shadow: 0 0 4px alpha(@accent2, 0.3); }
+    50%  { box-shadow: 0 0 14px alpha(@accent2, 0.6); }
+    100% { box-shadow: 0 0 4px alpha(@accent2, 0.3); }
+}
+@keyframes blink-crit {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* ── Bar chrome ── */
+window#waybar {
+    background: transparent;
+    color: #cdd6f4;
+}
+window#waybar > box {
+    margin: 4px 6px 0 6px;
+    background: linear-gradient(180deg, #0e0e1c, #0a0a16);
+    border: 1px solid alpha(@accent, 0.15);
+    border-bottom: 2px solid rgba(255, 160, 0, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 30px alpha(@accent, 0.04);
+}
+
+.module {
+    margin-bottom: -1px;
+}
+
+/* ── Divider arrows ── */
+#custom-ld,
+#custom-li,
+#custom-rd,
+#custom-ri {
+    font-size: 26px;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+/* ═════════════════════════════
+   LEFT SECTION
+   ═════════════════════════════ */
+
+/* Logo — glowing gold accent */
+#custom-logo {
+    font-size: 22px;
+    padding: 0 12px 0 10px;
+    color: #0a0a14;
+    background: linear-gradient(135deg, @accent, @accent2);
+    border-radius: 12px 0 0 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.1);
+}
+#custom-logo:hover {
+    background: linear-gradient(135deg, @accent, @accent-hi);
+}
+#custom-rd.1 {
+    color: @accent2;
+    background-color: #161630;
+}
+
+/* Workspaces */
+#workspaces {
+    padding: 0 6px;
+    background-color: #161630;
+}
+#workspaces button {
+    padding: 0 7px;
+    margin: 3px 2px;
+    border-radius: 8px;
+    border: none;
+    color: #3a3a5c;
+    background: transparent;
+    font-size: 10px;
+    min-width: 18px;
+    transition: all 0.2s ease;
+}
+#workspaces button.active {
+    color: #0a0a14;
+    background: linear-gradient(135deg, @accent, @accent2);
+    font-weight: 800;
+    font-size: 12px;
+    animation: pulse-gold 2.5s ease-in-out infinite;
+    border-radius: 8px;
+}
+#workspaces button:not(.empty):not(.active) {
+    color: @accent2;
+    font-size: 8px;
+}
+#workspaces button.empty {
+    color: #1e1e38;
+    font-size: 6px;
+}
+#workspaces button:hover {
+    color: @accent2;
+    background: alpha(@accent2, 0.15);
+}
+#custom-rd.2 {
+    color: #161630;
+}
+
+/* Taskbar */
+#taskbar {
+    padding: 0 2px;
+}
+#taskbar button {
+    padding: 2px 4px;
+    margin: 0 1px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+#taskbar button.active {
+    background: alpha(@accent2, 0.08);
+    box-shadow: 0 2px 0 @accent2;
+}
+
+/* Window title */
+#window {
+    margin: 0 14px;
+    color: #6c7086;
+    font-weight: normal;
+}
+
+/* ═════════════════════════════
+   CENTER SECTION
+   ═════════════════════════════ */
+
+/* GPU — green/teal */
+#custom-ld.1 {
+    color: #0f1f1a;
+}
+#custom-gpu {
+    background: linear-gradient(180deg, #122a22, #0f1f1a);
+    color: #94e2d5;
+    padding: 0 8px;
+}
+#custom-gpu.warning {
+    color: #f9e2af;
+}
+#custom-gpu.critical {
+    color: #f38ba8;
+    animation: blink-crit 1s ease-in-out infinite;
+}
+
+/* CPU — warm orange */
+#custom-ld.2 {
+    background-color: #0f1f1a;
+    color: #1f1710;
+}
+#cpu {
+    background: linear-gradient(180deg, #2a1e14, #1f1710);
+    color: #fab387;
+    padding: 0 8px;
+}
+
+/* Memory — rich purple */
+#custom-ld.3 {
+    background-color: #1f1710;
+    color: #1a1028;
+}
+#memory {
+    background: linear-gradient(180deg, #221430, #1a1028);
+    color: #cba6f7;
+    padding: 0 8px;
+}
+
+/* Temperature — deep red */
+#custom-ld.4 {
+    background-color: #1a1028;
+    color: #1f1018;
+}
+#temperature {
+    background: linear-gradient(180deg, #281420, #1f1018);
+    color: #f38ba8;
+    padding: 0 8px;
+}
+#temperature.critical {
+    color: #ff4060;
+    animation: blink-crit 1s ease-in-out infinite;
+}
+#custom-li.1 {
+    color: #1f1018;
+}
+
+/* ── Clock: golden heart ── */
+#custom-ld.5 {
+    color: #2a2010;
+}
+#clock.time {
+    background: linear-gradient(180deg, #342a14, #2a2010);
+    color: @accent2;
+    padding: 0 6px 0 8px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px alpha(@accent2, 0.35);
+}
+#custom-rd.3 {
+    background: linear-gradient(180deg, #28200e, #1e1a0c);
+    color: #2a2010;
+}
+#clock.date {
+    background: linear-gradient(180deg, #28200e, #1e1a0c);
+    color: #f9e2af;
+    padding: 0 8px 0 6px;
+    font-weight: normal;
+}
+#custom-rd.4 {
+    color: #1e1a0c;
+}
+
+/* Pulseaudio — green */
+#custom-ri.1 {
+    color: #0e1f12;
+}
+#pulseaudio {
+    background: linear-gradient(180deg, #142816, #0e1f12);
+    color: #a6e3a1;
+    padding: 0 8px;
+}
+#pulseaudio.muted {
+    color: #f38ba8;
+}
+
+/* Network — blue */
+#custom-rd.5 {
+    background: linear-gradient(180deg, #101828, #0c1420);
+    color: #0e1f12;
+}
+#network {
+    background: linear-gradient(180deg, #101828, #0c1420);
+    color: #89b4fa;
+    padding: 0 8px;
+}
+#network.disconnected {
+    color: #45475a;
+}
+
+/* ═════════════════════════════
+   RIGHT SECTION
+   ═════════════════════════════ */
+
+/* Media */
+#mpris {
+    padding: 0 8px;
+    color: #a6adc8;
+    font-weight: normal;
+}
+#mpris.paused {
+    color: #585b70;
+}
+
+/* System tray */
+#tray {
+    padding: 0 10px;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* Idle inhibitor */
+#custom-ld.6 {
+    color: #16162c;
+}
+#idle_inhibitor {
+    background: linear-gradient(180deg, #1c1c38, #16162c);
+    color: #45475a;
+    padding: 0 8px;
+    transition: all 0.3s ease;
+}
+#idle_inhibitor.activated {
+    color: #f9e2af;
+    text-shadow: 0 0 8px rgba(249, 226, 175, 0.4);
+}
+
+/* Power — gold bookend */
+#custom-ld.7 {
+    background: linear-gradient(180deg, #1c1c38, #16162c);
+    color: @accent2;
+}
+#custom-power {
+    background: linear-gradient(135deg, @accent, @accent2);
+    color: #0a0a14;
+    padding: 0 12px 0 10px;
+    font-size: 17px;
+    border-radius: 0 12px 0 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.1);
+}
+#custom-power:hover {
+    background: linear-gradient(135deg, @accent, @accent-hi);
+}
+
+/* ── Warning/Critical states ── */
+#cpu.warning,
+#memory.warning {
+    color: #f9e2af;
+}
+#cpu.critical,
+#memory.critical {
+    color: #f38ba8;
+    animation: blink-crit 1s ease-in-out infinite;
+}
+
+/* ── Tooltip ── */
+tooltip {
+    border: 2px solid alpha(@accent, 0.4);
+    border-radius: 14px;
+    background: rgba(10, 10, 20, 0.95);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+tooltip > box {
+    padding: 0 8px;
+}
+tooltip label {
+    color: #cdd6f4;
+    padding: 4px;
+}

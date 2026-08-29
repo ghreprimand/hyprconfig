@@ -1,0 +1,310 @@
+/* HyprConfig Waybar — Islands variant */
+
+
+@import "theme.css";
+@keyframes pulse-gold {
+    0%   { box-shadow: 0 0 4px alpha(@accent2, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4); }
+    50%  { box-shadow: 0 0 12px alpha(@accent2, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4); }
+    100% { box-shadow: 0 0 4px alpha(@accent2, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4); }
+}
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar * {
+    min-height: 0;
+}
+
+/* -- Bar chrome: fully transparent, islands float freely -- */
+window#waybar {
+    background: transparent;
+    color: #e0e0e0;
+}
+window#waybar > box {
+    margin: 6px 6px 0 6px;
+    background: transparent;
+}
+
+/* -- Island base style (applied to all groups) -- */
+#nav,
+#apps,
+#mpris,
+#clock,
+#stats,
+#audio,
+#net,
+#power {
+    background: rgba(14, 14, 28, 0.85);
+    border: 1px solid alpha(@accent, 0.08);
+    border-radius: 14px;
+    margin: 4px 3px;
+    padding: 2px 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 1px alpha(@accent, 0.06);
+    transition: all 0.3s ease;
+}
+#nav:hover,
+#apps:hover,
+#mpris:hover,
+#clock:hover,
+#stats:hover,
+#audio:hover,
+#net:hover,
+#power:hover {
+    border-color: alpha(@accent2, 0.25);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 8px alpha(@accent2, 0.08);
+}
+
+.module {
+    padding: 0 4px;
+}
+
+/* =============================================
+   NAV ISLAND: Logo + Workspaces
+   ============================================= */
+
+#custom-logo {
+    font-size: 20px;
+    padding: 0 10px 0 8px;
+    color: @accent2;
+    transition: all 0.2s ease;
+}
+#custom-logo:hover {
+    color: @accent-hi;
+    text-shadow: 0 0 8px alpha(@accent2, 0.4);
+}
+
+#workspaces {
+    padding: 0 4px;
+}
+#workspaces button {
+    padding: 0 6px;
+    margin: 3px 2px;
+    border-radius: 8px;
+    border: none;
+    color: #3a3a5c;
+    background: transparent;
+    font-size: 9px;
+    min-width: 16px;
+    transition: all 0.2s ease;
+}
+#workspaces button.active {
+    color: #0a0a14;
+    background: linear-gradient(135deg, @accent, @accent2);
+    font-weight: 800;
+    font-size: 11px;
+    border-radius: 8px;
+}
+#workspaces button:not(.empty):not(.active) {
+    color: @accent2;
+    font-size: 7px;
+}
+#workspaces button.empty {
+    color: #1e1e38;
+    font-size: 5px;
+}
+#workspaces button:hover {
+    color: @accent2;
+    background: alpha(@accent2, 0.12);
+}
+
+/* =============================================
+   APPS ISLAND: Taskbar + Title
+   ============================================= */
+
+#taskbar {
+    padding: 0 2px;
+}
+#taskbar button {
+    padding: 0 3px;
+    margin: 0 1px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+#taskbar button.active {
+    background: alpha(@accent2, 0.08);
+    box-shadow: 0 2px 0 @accent2;
+}
+
+#window {
+    margin: 0 6px;
+    color: #666;
+    font-weight: normal;
+}
+
+/* =============================================
+   MEDIA ISLAND
+   ============================================= */
+
+#mpris {
+    padding: 0 8px;
+    color: #aaa;
+    font-weight: normal;
+}
+#mpris.paused {
+    color: #666;
+}
+
+/* =============================================
+   CLOCK ISLAND
+   ============================================= */
+
+#clock.time {
+    color: @accent2;
+    padding: 0 6px 0 8px;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 8px alpha(@accent2, 0.2);
+}
+#clock.date {
+    color: #aaa;
+    padding: 0 8px 0 6px;
+    font-weight: normal;
+}
+#clock.date:hover {
+    color: #e0e0e0;
+}
+
+/* =============================================
+   STATS ISLAND: GPU, CPU, Memory, Temp
+   ============================================= */
+
+#custom-gpu {
+    color: #56b6c2;
+    padding: 0 6px;
+}
+#custom-gpu.warning {
+    color: #e5c07b;
+}
+#custom-gpu.critical {
+    color: #e06c75;
+}
+
+#cpu {
+    color: #d19a66;
+    padding: 0 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+#cpu.warning {
+    color: #e5c07b;
+}
+#cpu.critical {
+    color: #e06c75;
+}
+
+#memory {
+    color: #c678dd;
+    padding: 0 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+#memory.warning {
+    color: #e5c07b;
+}
+#memory.critical {
+    color: #e06c75;
+}
+
+#temperature {
+    color: #e06c75;
+    padding: 0 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+#temperature.critical {
+    color: #ff4060;
+}
+
+/* =============================================
+   AUDIO ISLAND
+   ============================================= */
+
+#pulseaudio {
+    color: #98c379;
+    padding: 0 8px;
+}
+#pulseaudio.muted {
+    color: #e06c75;
+}
+
+/* =============================================
+   NET ISLAND: Network + Tray
+   ============================================= */
+
+#network {
+    color: #61afef;
+    padding: 0 6px;
+}
+#network.disconnected {
+    color: #666;
+}
+
+#tray {
+    padding: 0 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* =============================================
+   POWER ISLAND: Idle Inhibitor + Power
+   ============================================= */
+
+#idle_inhibitor {
+    color: #666;
+    padding: 0 6px;
+    transition: color 0.2s ease;
+}
+#idle_inhibitor.activated {
+    color: #e5c07b;
+    text-shadow: 0 0 6px rgba(229, 192, 123, 0.3);
+}
+
+#custom-power {
+    font-size: 16px;
+    padding: 0 8px 0 6px;
+    color: @accent2;
+    transition: all 0.2s ease;
+}
+#custom-power:hover {
+    color: @accent-hi;
+    text-shadow: 0 0 8px alpha(@accent2, 0.4);
+}
+
+/* -- Interactive hover effects -- */
+#custom-gpu:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover,
+#idle_inhibitor:hover,
+#clock.date:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+}
+
+/* -- Tooltip -- */
+tooltip {
+    border: 1px solid alpha(@accent, 0.3);
+    border-radius: 12px;
+    background: rgba(14, 14, 28, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+tooltip > box {
+    padding: 0 6px;
+}
+tooltip label {
+    color: #e0e0e0;
+    padding: 3px;
+    font-size: 13px;
+}

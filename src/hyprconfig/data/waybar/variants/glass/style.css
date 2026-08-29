@@ -1,0 +1,194 @@
+/* HyprConfig Waybar — Crystal Clear Glass variant
+ * Based on JaKooLit/Hyprland-Dots "Crystal Clear Glass" by Ahum Maitra
+ * (https://github.com/JaKooLit/Hyprland-Dots)
+ * True glassmorphism: transparent bar, frosted glass module panels
+ * with inner-glow box-shadows. Adapts to any wallpaper. */
+
+* {
+    background-color: transparent;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    border: none;
+    font-weight: bold;
+    border-radius: 0px;
+    min-height: 0;
+    font-size: 14px;
+    margin-top: 3px;
+    padding-bottom: 2px;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Three frosted glass panels */
+.modules-left {
+    border-radius: 12px;
+    border: 1px solid transparent;
+    opacity: 0.8;
+    padding-left: 5px;
+    padding-right: 15px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 1px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.modules-right {
+    border-radius: 12px;
+    border: 1px solid transparent;
+    opacity: 0.8;
+    padding-left: 15px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 1px 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.modules-center {
+    border-radius: 12px;
+    border: 1px solid transparent;
+    opacity: 0.8;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+label.module {
+    font-size: 14px;
+    padding: 3px 10px;
+    transition: all 0.3s ease-out;
+    border-radius: 10px;
+}
+
+/* ===== WORKSPACES ===== */
+#workspaces {
+    padding: 5px 3px;
+    font-weight: 600;
+}
+
+#workspaces button {
+    border-radius: 3px;
+    padding: 0 5px;
+    margin: 0 2px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid transparent;
+}
+
+#workspaces button.active {
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    min-width: 30px;
+    box-shadow:
+        inset 1px 2px 2px rgba(255, 255, 255, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+}
+
+/* ===== LOGO ===== */
+#custom-logo {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+/* ===== WINDOW ===== */
+#window {
+    background-color: transparent;
+    padding-right: 12px;
+    font-weight: normal;
+}
+
+/* ===== TASKBAR ===== */
+#taskbar {
+    padding: 5px 0;
+}
+#taskbar button {
+    border-radius: 6px;
+    padding: 0 5px;
+}
+
+/* ===== CLOCK ===== */
+#clock {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+/* ===== ALL MODULES — transparent on glass ===== */
+#custom-logo,
+#taskbar,
+#window,
+#mpris,
+#custom-gpu,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#network,
+#tray,
+#idle_inhibitor,
+#custom-power,
+#clock {
+    background-color: transparent;
+}
+
+/* ===== STATES ===== */
+#temperature.critical {
+    color: #ff4444;
+}
+
+#cpu.warning,
+#memory.warning,
+#custom-gpu.warning {
+    color: #ffcc00;
+}
+
+#cpu.critical,
+#memory.critical,
+#custom-gpu.critical {
+    color: #ff4444;
+}
+
+#pulseaudio.muted {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#network.disconnected {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#idle_inhibitor.activated {
+    color: #39FF14;
+}
+
+#mpris.paused {
+    opacity: 0.5;
+}
+
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ===== POWER ===== */
+#custom-power {
+    font-size: 16px;
+    padding: 0 8px;
+}
+
+/* ===== TOOLTIP ===== */
+tooltip {
+    border-radius: 12px;
+    border: 1px solid transparent;
+    opacity: 0.7;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 1px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #ffffff;
+    }
+}

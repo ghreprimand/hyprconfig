@@ -1,0 +1,19 @@
+HyprConfig
+
+The HyprConfig application is licensed under GPL-3.0-only. See LICENSE.
+
+Bundled Waybar variants contain adapted material from the following projects:
+
+- sejjy/mechabar, copyright 2025 Jesse Mirabel, MIT License.
+  Source: https://github.com/sejjy/mechabar
+  License copy: third_party/licenses/mechabar-MIT.txt
+- ttpears/waybar, copyright 2025 Waybar Sway Configuration, MIT License.
+  Source: https://github.com/ttpears/waybar
+  License copy: third_party/licenses/ttpears-waybar-MIT.txt
+- JaKooLit/Hyprland-Dots, GPL-3.0.
+  Source: https://github.com/JaKooLit/Hyprland-Dots
+  The applicable license is reproduced in the top-level LICENSE file.
+
+Individual stylesheet headers retain more specific upstream theme credits.
+Dependency names and trademarks belong to their respective owners. Inclusion
+or interoperability does not imply endorsement.

@@ -1,0 +1,305 @@
+/* HyprConfig Waybar — Synthwave variant
+ * Based on ttpears/waybar Synthwave/Outrun theme
+ * (https://github.com/ttpears/waybar)
+ * Neon magenta/cyan on deep purple, pill modules with glow effects.
+ * Retro-futuristic 80s aesthetic. */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: rgba(26, 9, 40, 0.9);
+    color: #f8f8f2;
+    border-radius: 0;
+}
+
+/* Module pill base */
+#custom-logo,
+#workspaces,
+#taskbar,
+#window,
+#mpris,
+#clock,
+#custom-gpu,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#network,
+#tray,
+#idle_inhibitor,
+#custom-power {
+    margin: 4px 3px;
+    padding: 4px 12px;
+    background: rgba(45, 20, 70, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 0, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+/* Hover glow intensify */
+#custom-logo:hover,
+#custom-gpu:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#network:hover,
+#clock:hover,
+#tray:hover,
+#idle_inhibitor:hover {
+    background: rgba(75, 35, 110, 0.9);
+    border-color: rgba(255, 0, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+/* =============================================
+   LOGO
+   ============================================= */
+#custom-logo {
+    font-size: 18px;
+    color: #ff00ff;
+    padding: 4px 14px;
+}
+#custom-logo:hover {
+    color: #ff66ff;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+}
+
+/* =============================================
+   WORKSPACES
+   ============================================= */
+#workspaces {
+    padding: 4px 6px;
+}
+#workspaces button {
+    color: #00ffff;
+    padding: 2px 8px;
+    margin: 2px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    font-size: 9px;
+    min-width: 14px;
+    transition: all 0.3s ease;
+}
+#workspaces button.active {
+    background: #ff00ff;
+    color: #1a0928;
+    font-weight: bold;
+    font-size: 11px;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
+}
+#workspaces button:not(.empty):not(.active) {
+    color: #00ffff;
+    font-size: 7px;
+}
+#workspaces button.empty {
+    color: rgba(0, 255, 255, 0.15);
+    font-size: 5px;
+}
+#workspaces button:hover {
+    background: rgba(189, 51, 164, 0.8);
+    color: #f8f8f2;
+}
+
+/* =============================================
+   TASKBAR
+   ============================================= */
+#taskbar {
+    padding: 4px 6px;
+    border-color: rgba(189, 51, 164, 0.3);
+}
+#taskbar button {
+    padding: 0 3px;
+    margin: 0 1px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+}
+#taskbar button.active {
+    background: rgba(255, 0, 255, 0.15);
+    box-shadow: 0 2px 0 #ff00ff;
+}
+
+/* =============================================
+   WINDOW
+   ============================================= */
+#window {
+    color: #00ffff;
+    font-style: italic;
+    font-weight: normal;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* =============================================
+   CLOCK — Hot pink with neon glow
+   ============================================= */
+#clock.time {
+    color: #ff00ff;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+}
+#clock.date {
+    color: #bd33a4;
+    font-weight: normal;
+}
+#clock.date:hover {
+    color: #ff00ff;
+}
+
+/* =============================================
+   STATS
+   ============================================= */
+#custom-gpu {
+    color: #00ffff;
+}
+#custom-gpu.warning { color: #ffff00; }
+#custom-gpu.critical {
+    color: #ff1493;
+    background: rgba(255, 20, 147, 0.15);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+#cpu {
+    color: #00ffff;
+}
+#cpu.warning {
+    color: #ffff00;
+    background: rgba(255, 255, 0, 0.15);
+    box-shadow: 0 0 8px rgba(255, 255, 0, 0.4);
+}
+#cpu.critical {
+    color: #ff1493;
+    background: rgba(255, 20, 147, 0.15);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    font-weight: bold;
+}
+
+#memory {
+    color: #bd33a4;
+}
+#memory.warning {
+    color: #ffff00;
+    background: rgba(255, 255, 0, 0.15);
+}
+#memory.critical {
+    color: #ff1493;
+    background: rgba(255, 20, 147, 0.15);
+    font-weight: bold;
+}
+
+#temperature {
+    color: #00ffff;
+}
+#temperature.critical {
+    color: #ff1493;
+    background: rgba(255, 20, 147, 0.15);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    font-weight: bold;
+}
+
+/* =============================================
+   AUDIO
+   ============================================= */
+#pulseaudio {
+    color: #00ffff;
+}
+#pulseaudio.muted {
+    color: #ff1493;
+    background: rgba(255, 20, 147, 0.15);
+}
+
+/* =============================================
+   NETWORK
+   ============================================= */
+#network {
+    color: #00ffff;
+}
+#network.disconnected {
+    color: #ff1493;
+    background: rgba(255, 20, 147, 0.15);
+}
+
+/* =============================================
+   MEDIA
+   ============================================= */
+#mpris {
+    color: #bd33a4;
+    font-weight: normal;
+}
+#mpris.paused {
+    color: #ffff00;
+}
+
+/* =============================================
+   TRAY
+   ============================================= */
+#tray {
+    padding: 4px 10px;
+}
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(255, 255, 0, 0.3);
+    border-color: #ffff00;
+}
+
+/* =============================================
+   IDLE INHIBITOR
+   ============================================= */
+#idle_inhibitor {
+    color: #00ff00;
+}
+#idle_inhibitor.activated {
+    color: #ffff00;
+    background: rgba(255, 255, 0, 0.3);
+    border-color: rgba(255, 255, 0, 0.6);
+    box-shadow: 0 0 12px rgba(255, 255, 0, 0.5);
+}
+
+/* =============================================
+   POWER — Hot pink neon
+   ============================================= */
+#custom-power {
+    background: rgba(255, 20, 147, 0.4);
+    color: #ff1493;
+    border-color: rgba(255, 20, 147, 0.6);
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.4);
+}
+#custom-power:hover {
+    background: rgba(255, 20, 147, 0.7);
+    color: #f8f8f2;
+    border-color: #ff1493;
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.7);
+}
+
+/* =============================================
+   TOOLTIP
+   ============================================= */
+tooltip {
+    border: 1px solid rgba(255, 0, 255, 0.4);
+    border-radius: 10px;
+    background: rgba(26, 9, 40, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 0, 255, 0.15);
+}
+tooltip > box { padding: 0 6px; }
+tooltip label {
+    color: #f8f8f2;
+    padding: 3px;
+    font-size: 13px;
+}

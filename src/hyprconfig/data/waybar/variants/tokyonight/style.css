@@ -1,0 +1,309 @@
+/* HyprConfig Waybar — Tokyo Night variant
+ * Based on ttpears/waybar Tokyo Night theme
+ * (https://github.com/ttpears/waybar)
+ * Soft blue-purple pastels on dark navy background.
+ * Grouped pill modules with subtle borders and shadows. */
+
+/* -- Tokyo Night palette -- */
+@define-color bg         #1a1b26;
+@define-color bg-dark    #16161e;
+@define-color bg-hl      #292e42;
+@define-color terminal   #414868;
+@define-color fg         #c0caf5;
+@define-color fg-dark    #a9b1d6;
+@define-color fg-gutter  #3b4261;
+@define-color comment    #565f89;
+@define-color dark3      #545c7e;
+@define-color blue0      #3d59a1;
+@define-color blue       #7aa2f7;
+@define-color cyan       #7dcfff;
+@define-color blue1      #2ac3de;
+@define-color blue5      #89ddff;
+@define-color green      #9ece6a;
+@define-color yellow     #e0af68;
+@define-color orange     #ff9e64;
+@define-color red        #f7768e;
+@define-color magenta    #bb9af7;
+@define-color magenta2   #ff007c;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar * { min-height: 0; }
+
+/* -- Bar: semi-transparent navy -- */
+window#waybar {
+    background: transparent;
+    color: @fg;
+}
+window#waybar > box {
+    margin: 6px 6px 0 6px;
+    background: transparent;
+}
+
+/* -- Group pill base -- */
+#nav,
+#apps,
+#mpris,
+#clock,
+#stats,
+#audio,
+#net,
+#power {
+    background: alpha(@bg, 0.88);
+    border: 1px solid alpha(@blue, 0.3);
+    border-radius: 14px;
+    margin: 4px 3px;
+    padding: 2px 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 4px alpha(@blue, 0.1);
+    transition: all 0.3s ease;
+}
+#nav:hover,
+#apps:hover,
+#mpris:hover,
+#clock:hover,
+#stats:hover,
+#audio:hover,
+#net:hover,
+#power:hover {
+    border-color: alpha(@blue, 0.5);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 8px alpha(@blue, 0.2);
+}
+
+.module { padding: 0 4px; }
+
+/* =============================================
+   NAV: Logo + Workspaces
+   ============================================= */
+#custom-logo {
+    font-size: 20px;
+    padding: 0 10px 0 8px;
+    color: @blue;
+    transition: all 0.2s ease;
+}
+#custom-logo:hover {
+    color: @cyan;
+    text-shadow: 0 0 8px alpha(@cyan, 0.4);
+}
+
+#workspaces { padding: 0 4px; }
+#workspaces button {
+    padding: 0 6px;
+    margin: 3px 2px;
+    border-radius: 8px;
+    border: none;
+    color: @fg-gutter;
+    background: transparent;
+    font-size: 9px;
+    min-width: 16px;
+    transition: all 0.2s ease;
+}
+#workspaces button.active {
+    color: @bg;
+    background: @blue;
+    font-weight: 800;
+    font-size: 11px;
+    box-shadow: 0 0 12px alpha(@blue, 0.6);
+}
+#workspaces button:not(.empty):not(.active) {
+    color: @blue;
+    font-size: 7px;
+}
+#workspaces button.empty {
+    color: alpha(@fg-gutter, 0.4);
+    font-size: 5px;
+}
+#workspaces button:hover {
+    background: alpha(@blue, 0.15);
+    color: @fg;
+}
+
+/* =============================================
+   APPS: Taskbar + Title
+   ============================================= */
+#taskbar { padding: 0 2px; }
+#taskbar button {
+    padding: 0 3px;
+    margin: 0 1px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+#taskbar button.active {
+    background: alpha(@blue, 0.1);
+    box-shadow: 0 2px 0 @blue;
+}
+
+#window {
+    margin: 0 6px;
+    color: @cyan;
+    font-weight: normal;
+}
+
+/* =============================================
+   MEDIA
+   ============================================= */
+#mpris {
+    padding: 0 8px;
+    color: @magenta;
+    font-weight: normal;
+}
+#mpris.paused { color: @yellow; }
+
+/* =============================================
+   CLOCK
+   ============================================= */
+#clock.time {
+    color: @blue;
+    padding: 0 6px 0 8px;
+    letter-spacing: 0.3px;
+}
+#clock.date {
+    color: @comment;
+    padding: 0 8px 0 6px;
+    font-weight: normal;
+}
+#clock.date:hover { color: @fg-dark; }
+
+/* =============================================
+   STATS: GPU, CPU, Memory, Temp
+   ============================================= */
+#custom-gpu {
+    color: @cyan;
+    padding: 0 6px;
+}
+#custom-gpu.warning { color: @yellow; }
+#custom-gpu.critical { color: @red; }
+
+#cpu {
+    color: @green;
+    padding: 0 6px;
+    border-left: 1px solid alpha(@fg-gutter, 0.4);
+}
+#cpu.warning {
+    color: @yellow;
+    background: alpha(@yellow, 0.15);
+    box-shadow: 0 0 8px alpha(@yellow, 0.3);
+}
+#cpu.critical {
+    color: @red;
+    background: alpha(@red, 0.15);
+    box-shadow: 0 0 10px alpha(@red, 0.4);
+    font-weight: bold;
+}
+
+#memory {
+    color: @cyan;
+    padding: 0 6px;
+    border-left: 1px solid alpha(@fg-gutter, 0.4);
+}
+#memory.warning { color: @yellow; }
+#memory.critical {
+    color: @red;
+    background: alpha(@red, 0.15);
+}
+
+#temperature {
+    color: @green;
+    padding: 0 6px;
+    border-left: 1px solid alpha(@fg-gutter, 0.4);
+}
+#temperature.critical {
+    color: @red;
+    background: alpha(@red, 0.15);
+    box-shadow: 0 0 10px alpha(@red, 0.4);
+}
+
+/* =============================================
+   AUDIO
+   ============================================= */
+#pulseaudio {
+    color: @cyan;
+    padding: 0 8px;
+}
+#pulseaudio.muted {
+    color: @red;
+    background: alpha(@red, 0.15);
+}
+
+/* =============================================
+   NET: Network + Tray
+   ============================================= */
+#network {
+    color: @cyan;
+    padding: 0 6px;
+}
+#network.disconnected {
+    color: @red;
+    background: alpha(@red, 0.15);
+}
+
+#tray {
+    padding: 0 6px;
+    border-left: 1px solid alpha(@fg-gutter, 0.4);
+}
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* =============================================
+   POWER: Idle + Power button
+   ============================================= */
+#idle_inhibitor {
+    color: @comment;
+    padding: 0 6px;
+    transition: color 0.2s ease;
+}
+#idle_inhibitor.activated {
+    color: @yellow;
+    background: alpha(@yellow, 0.15);
+    border-radius: 6px;
+    box-shadow: 0 0 10px alpha(@yellow, 0.4);
+}
+
+#custom-power {
+    font-size: 16px;
+    padding: 0 8px 0 6px;
+    color: @red;
+    transition: all 0.2s ease;
+}
+#custom-power:hover {
+    color: @fg;
+    background: alpha(@red, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 0 12px alpha(@red, 0.5);
+}
+
+/* -- Interactive hover -- */
+#custom-gpu:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover,
+#idle_inhibitor:hover,
+#clock.date:hover {
+    background: alpha(@bg-hl, 0.6);
+    border-radius: 6px;
+}
+
+/* -- Tooltip -- */
+tooltip {
+    border: 1px solid alpha(@blue, 0.3);
+    border-radius: 12px;
+    background: alpha(@bg-dark, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+tooltip > box { padding: 0 6px; }
+tooltip label {
+    color: @fg;
+    padding: 3px;
+    font-size: 13px;
+}

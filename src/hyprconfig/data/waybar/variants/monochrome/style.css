@@ -1,0 +1,154 @@
+/* HyprConfig Waybar — Monochrome variant
+ * Based on JaKooLit/Hyprland-Dots "[Black & White] Monochrome"
+ * (https://github.com/JaKooLit/Hyprland-Dots)
+ * Pure black and white. Three floating black panels with
+ * white text and white bottom borders. Stripped-down aesthetic. */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-weight: bold;
+    min-height: 0;
+    font-size: 14px;
+}
+
+window#waybar,
+window#waybar.empty,
+window#waybar.empty #window {
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+}
+
+tooltip {
+    color: white;
+    background: #1e1e2e;
+    opacity: 0.8;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+tooltip label {
+    color: #cdd6f4;
+}
+
+/* Three floating black panels */
+.modules-right,
+.modules-center,
+.modules-left {
+    background-color: black;
+    color: white;
+    border-bottom: 1px solid white;
+    border-radius: 10px;
+    padding: 2px 4px;
+}
+
+/* ===== WORKSPACES ===== */
+#workspaces button {
+    color: dimgrey;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0 4px;
+    border-radius: 9px;
+    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+}
+#workspaces button:hover {
+    color: white;
+    background-color: #7f849c;
+    padding: 0 4px;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+#workspaces button.active {
+    color: white;
+    padding: 0 8px;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+/* ===== BASE MODULE STYLE ===== */
+#custom-logo,
+#taskbar,
+#window,
+#mpris,
+#custom-gpu,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#network,
+#tray,
+#idle_inhibitor,
+#custom-power,
+#clock {
+    padding: 4px 6px;
+}
+
+/* ===== LOGO ===== */
+#custom-logo {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+/* ===== TASKBAR ===== */
+#taskbar button {
+    padding: 0 3px;
+    margin: 0 1px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+}
+#taskbar button.active {
+    color: white;
+    padding: 0 6px;
+}
+
+/* ===== WINDOW ===== */
+#window {
+    font-weight: normal;
+    padding: 0 12px;
+}
+
+/* ===== MEDIA ===== */
+#mpris {
+    font-weight: normal;
+}
+#mpris.paused {
+    color: dimgrey;
+}
+
+/* ===== STATES ===== */
+#idle_inhibitor.activated {
+    color: #39FF14;
+}
+
+#pulseaudio.muted {
+    color: #cc3436;
+}
+
+#temperature.critical {
+    color: red;
+}
+
+#cpu.warning,
+#memory.warning,
+#custom-gpu.warning {
+    color: #f9e2af;
+}
+
+#cpu.critical,
+#memory.critical,
+#custom-gpu.critical {
+    color: #f38ba8;
+}
+
+#network.disconnected {
+    color: dimgrey;
+}
+
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ===== POWER ===== */
+#custom-power {
+    font-size: 16px;
+    padding: 0 8px;
+}

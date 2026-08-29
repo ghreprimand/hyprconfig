@@ -1,0 +1,224 @@
+/* HyprConfig Waybar — Bottom Dock variant
+ * A macOS dock-inspired bottom bar with large centered app icons,
+ * compact status indicators, and a floating dark rounded pill.
+ * Inspired by macOS dock and community bottom-bar rices. */
+
+
+@import "theme.css";
+@keyframes dock-bounce {
+    0%   { margin-bottom: 0; }
+    40%  { margin-bottom: 6px; }
+    100% { margin-bottom: 0; }
+}
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar * { min-height: 0; }
+
+/* -- Bar: floating dark dock pill at bottom -- */
+window#waybar {
+    background: rgba(10, 10, 20, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.4),
+                0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* -- Separator -- */
+#custom-separator {
+    color: rgba(255, 255, 255, 0.1);
+    padding: 0 6px;
+    font-size: 18px;
+}
+
+/* =============================================
+   LOGO
+   ============================================= */
+#custom-logo {
+    font-size: 22px;
+    padding: 0 14px 0 12px;
+    color: @accent2;
+    transition: all 0.2s ease;
+}
+#custom-logo:hover {
+    color: @accent-hi;
+    text-shadow: 0 0 10px alpha(@accent2, 0.4);
+}
+
+/* =============================================
+   WORKSPACES — Compact dot indicators
+   ============================================= */
+#workspaces {
+    padding: 0 8px;
+}
+#workspaces button {
+    padding: 0 4px;
+    margin: 4px 2px;
+    border-radius: 50%;
+    border: none;
+    color: rgba(255, 255, 255, 0.12);
+    background: transparent;
+    font-size: 7px;
+    min-width: 12px;
+    transition: all 0.2s ease;
+}
+#workspaces button.active {
+    color: @accent2;
+    font-size: 10px;
+    font-weight: 800;
+    text-shadow: 0 0 6px alpha(@accent2, 0.4);
+}
+#workspaces button:not(.empty):not(.active) {
+    color: alpha(@accent2, 0.5);
+    font-size: 6px;
+}
+#workspaces button.empty {
+    color: rgba(255, 255, 255, 0.06);
+    font-size: 4px;
+}
+#workspaces button:hover {
+    color: @accent2;
+    background: alpha(@accent2, 0.1);
+}
+
+/* =============================================
+   TASKBAR — Large centered app icons (dock feel)
+   ============================================= */
+#taskbar {
+    padding: 0 8px;
+}
+#taskbar button {
+    padding: 2px 6px;
+    margin: 0 2px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    transition: all 0.15s ease;
+}
+#taskbar button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    margin-bottom: 3px;
+}
+#taskbar button.active {
+    background: alpha(@accent2, 0.06);
+    box-shadow: 0 -2px 0 alpha(@accent2, 0.6);
+}
+
+/* =============================================
+   CLOCK — Simple centered time
+   ============================================= */
+#clock.time {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 8px;
+    letter-spacing: 0.5px;
+}
+
+/* =============================================
+   STATS — Compact icon-focused
+   ============================================= */
+#custom-gpu {
+    color: rgba(120, 220, 200, 0.8);
+    padding: 0 6px;
+}
+#custom-gpu.warning { color: #f0c060; }
+#custom-gpu.critical { color: #ff4060; }
+
+#cpu {
+    color: rgba(200, 160, 120, 0.8);
+    padding: 0 6px;
+}
+#cpu.warning { color: #f0c060; }
+#cpu.critical { color: #ff4060; }
+
+#memory {
+    color: rgba(180, 140, 220, 0.8);
+    padding: 0 6px;
+}
+#memory.warning { color: #f0c060; }
+#memory.critical { color: #ff4060; }
+
+/* =============================================
+   AUDIO — Icon only with tooltip
+   ============================================= */
+#pulseaudio {
+    color: rgba(140, 200, 160, 0.8);
+    padding: 0 6px;
+    font-size: 16px;
+}
+#pulseaudio.muted {
+    color: rgba(255, 80, 80, 0.6);
+}
+
+/* =============================================
+   NETWORK — Icon only with tooltip
+   ============================================= */
+#network {
+    color: rgba(140, 180, 230, 0.8);
+    padding: 0 6px;
+    font-size: 16px;
+}
+#network.disconnected {
+    color: rgba(255, 255, 255, 0.15);
+}
+
+/* =============================================
+   TRAY
+   ============================================= */
+#tray {
+    padding: 0 6px;
+}
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* =============================================
+   POWER
+   ============================================= */
+#custom-power {
+    font-size: 16px;
+    padding: 0 12px 0 6px;
+    color: alpha(@accent2, 0.7);
+    transition: all 0.2s ease;
+}
+#custom-power:hover {
+    color: @accent2;
+    text-shadow: 0 0 8px alpha(@accent2, 0.4);
+}
+
+/* -- Interactive hover -- */
+#custom-gpu:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* -- Tooltip -- */
+tooltip {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(10, 10, 20, 0.92);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+tooltip > box { padding: 0 6px; }
+tooltip label {
+    color: rgba(255, 255, 255, 0.85);
+    padding: 3px;
+    font-size: 13px;
+}

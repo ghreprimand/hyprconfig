@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=HyprConfig
+GenericName=Hyprland Configuration
+Comment=Configure Hyprland keybindings, effects, Waybar, themes, displays, and wallpapers
+Exec=hyprconfig
+Icon=preferences-desktop
+Terminal=false
+Type=Application
+Categories=Settings;
+Keywords=hyprland;wayland;config;keybindings;waybar;theme;effects;display;
+StartupNotify=true

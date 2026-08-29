@@ -1,0 +1,178 @@
+/* HyprConfig Waybar — Half-Moon variant
+ * Based on JaKooLit/Hyprland-Dots "[Dark] Half-Moon" by TomekBobrowicz
+ * (https://github.com/JaKooLit/Hyprland-Dots)
+ * Individual dark rounded pills (50px radius) with rainbow gradient
+ * workspace indicators and distinct accent colors per module. */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-weight: bold;
+    min-height: 0;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: transparent;
+    border: 0;
+    color: #E6B673;
+}
+
+tooltip {
+    background: #0F1419;
+    border: 1px solid #D2A6FF;
+    border-radius: 10px;
+}
+tooltip label {
+    color: #F3F4F5;
+}
+
+/* ===== WORKSPACES — gradient pills ===== */
+#workspaces {
+    background: #0F1419;
+    margin: 5px;
+    padding: 0 1px;
+    border-radius: 15px;
+    border: 0;
+    color: #0F1419;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    margin: 4px 3px;
+    border-radius: 15px;
+    border: 0;
+    color: #0F1419;
+    background: linear-gradient(45deg, #95E6CB, #59C2FF, #D2A6FF);
+    opacity: 0.5;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button.active {
+    padding: 0 5px;
+    margin: 4px 3px;
+    border-radius: 15px;
+    color: #0F1419;
+    background: linear-gradient(45deg, #59C2FF, #D2A6FF);
+    opacity: 1.0;
+    min-width: 40px;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button:hover {
+    border-radius: 15px;
+    color: #0F1419;
+    background: linear-gradient(45deg, #59C2FF, #D2A6FF);
+    opacity: 0.8;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+/* ===== MODULE BASE — individual dark pills ===== */
+#custom-logo,
+#taskbar,
+#window,
+#mpris,
+#custom-gpu,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#network,
+#tray,
+#idle_inhibitor,
+#custom-power,
+#clock {
+    background: #0F1419;
+    border-radius: 50px;
+    margin: 5px;
+    padding: 2px 15px;
+}
+
+/* ===== LOGO ===== */
+#custom-logo {
+    font-size: 18px;
+    color: #59C2FF;
+    padding: 2px 15px;
+    border-radius: 0 15px 50px 0;
+}
+
+/* ===== TASKBAR ===== */
+#taskbar {
+    padding: 2px 8px;
+}
+#taskbar button {
+    padding: 0 5px;
+    margin: 4px 3px;
+    border-radius: 15px;
+    border: 0;
+    color: #0F1419;
+    background: linear-gradient(45deg, #95E6CB, #59C2FF, #D2A6FF);
+    min-height: 0;
+    min-width: 0;
+}
+#taskbar button.active {
+    background: linear-gradient(45deg, #59C2FF, #D2A6FF);
+    opacity: 1.0;
+}
+
+/* ===== WINDOW — cream text pill ===== */
+#window {
+    color: #E6E1CF;
+    font-weight: normal;
+}
+
+/* ===== CLOCK — green accent ===== */
+#clock {
+    color: #B8CC52;
+}
+
+/* ===== STATS — per-module colors ===== */
+#custom-gpu { color: #95E6CB; }
+#custom-gpu.warning { color: #E6B673; }
+#custom-gpu.critical { color: #F07178; }
+
+#cpu { color: #F3F4F5; }
+#cpu.warning { color: #E6B673; }
+#cpu.critical { color: #F07178; }
+
+#memory { color: #E6B673; }
+#memory.warning { color: #FF8F40; }
+#memory.critical { color: #F07178; }
+
+#temperature { color: #E6B673; }
+#temperature.critical { color: #F07178; }
+
+/* ===== AUDIO — sky blue ===== */
+#pulseaudio { color: #59C2FF; }
+#pulseaudio.muted { color: #F07178; }
+
+/* ===== NETWORK — orange ===== */
+#network { color: #FF8F40; }
+#network.disconnected { color: #565B66; }
+
+/* ===== MEDIA — red/pink ===== */
+#mpris {
+    color: #F07178;
+    padding-left: 8px;
+    padding-right: 2px;
+    font-weight: normal;
+}
+#mpris.paused { color: #565B66; }
+
+/* ===== TRAY — cream ===== */
+#tray { color: #E6E1CF; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ===== IDLE INHIBITOR ===== */
+#idle_inhibitor { color: #B8CC52; }
+#idle_inhibitor.activated {
+    color: #39FF14;
+}
+
+/* ===== POWER — asymmetric pill ===== */
+#custom-power {
+    color: #D2A6FF;
+    border-radius: 15px 0 0 50px;
+    padding: 2px 15px;
+    font-size: 16px;
+}

@@ -1,0 +1,170 @@
+/* HyprConfig Waybar — Golden Noir variant
+ * Based on JaKooLit/Hyprland-Dots "[Dark] Golden Noir" by Krautt
+ * (https://github.com/JaKooLit/Hyprland-Dots)
+ * Deep black bar with gold accents. Center section framed by gold borders.
+ * Elegant dark luxury aesthetic. */
+
+
+@import "theme.css";
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-weight: bold;
+    min-height: 0;
+    font-size: 14px;
+}
+
+window#waybar {
+    background: #040406;
+    border-radius: 0;
+    color: #cba6f7;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border-radius: 10px;
+    border: 2px solid #11111b;
+    color: @accent2;
+}
+
+/* Center section gold frame */
+.modules-center {
+    border-left: 1px solid @accent2;
+    border-right: 1px solid @accent2;
+    border-radius: 20px;
+    padding: 2px 4px;
+}
+
+.modules-left,
+.modules-right {
+    padding: 2px 4px;
+}
+
+/* ===== WORKSPACES ===== */
+#workspaces button {
+    color: #6E6A86;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0 4px;
+    border-radius: 9px;
+    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button.active {
+    color: @accent2;
+    background-color: black;
+    border-radius: 15px;
+    padding: 0 8px;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button:hover {
+    color: @accent2;
+    border-radius: 15px;
+    padding: 0 4px;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+/* ===== BASE MODULE STYLE ===== */
+#custom-logo,
+#taskbar,
+#window,
+#mpris,
+#custom-gpu,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#network,
+#tray,
+#idle_inhibitor,
+#custom-power,
+#clock {
+    color: #e5d9f5;
+    padding: 5px 6px;
+}
+
+/* ===== LOGO ===== */
+#custom-logo {
+    font-size: 20px;
+    color: @accent2;
+    padding: 0 10px;
+}
+
+/* ===== TASKBAR ===== */
+#taskbar button {
+    padding: 0 3px;
+    margin: 0 1px;
+    min-height: 0;
+    min-width: 0;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+#taskbar button.active {
+    color: @accent2;
+    border-radius: 15px;
+    background-color: black;
+    padding: 0 6px;
+}
+
+/* ===== WINDOW ===== */
+#window {
+    color: #e5d9f5;
+    font-weight: normal;
+}
+
+/* ===== CLOCK — gold center ===== */
+#clock {
+    color: @accent2;
+    padding: 2px 12px;
+}
+
+/* ===== STATS ===== */
+#custom-gpu { color: #94e2d5; }
+#custom-gpu.warning { color: #f9e2af; }
+#custom-gpu.critical { color: #f38ba8; }
+
+#cpu { color: #f5f5f5; }
+#cpu.warning { color: #f9e2af; }
+#cpu.critical { color: #f38ba8; }
+
+#memory { color: #cba6f7; }
+#memory.warning { color: #f9e2af; }
+#memory.critical { color: #f38ba8; }
+
+#temperature { color: #e5d9f5; }
+#temperature.critical {
+    background-color: #ff0000;
+    color: white;
+}
+
+/* ===== AUDIO ===== */
+#pulseaudio { color: #89b4fa; }
+#pulseaudio.muted { color: #cc3436; }
+
+/* ===== NETWORK ===== */
+#network { color: #94e2d5; }
+#network.disconnected { color: #585b70; }
+
+/* ===== MEDIA ===== */
+#mpris { color: #f5c2e7; font-weight: normal; }
+#mpris.paused { color: #6E6A86; }
+
+/* ===== TRAY ===== */
+#tray { color: #e5d9f5; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+/* ===== IDLE INHIBITOR ===== */
+#idle_inhibitor { color: #6E6A86; }
+#idle_inhibitor.activated {
+    color: #39FF14;
+}
+
+/* ===== POWER ===== */
+#custom-power {
+    color: @accent2;
+    font-size: 16px;
+    padding: 0 8px;
+}
