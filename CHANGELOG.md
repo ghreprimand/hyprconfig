@@ -17,6 +17,7 @@ public release.
 - GPL-3.0-only project license and third-party license notices
 - Recursive stock/split Hyprland configuration discovery
 - Recoverable atomic configuration writes and managed Hyprland fragment
+- Sanitized application screenshot and documented compatibility matrix
 
 ### Changed
 

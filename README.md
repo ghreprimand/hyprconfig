@@ -5,6 +5,8 @@ keybindings, visual effects, Waybar styles, color generation, displays, and
 wallpapers in one native desktop application while continuing to use ordinary
 Hyprland configuration files as the source of truth.
 
+![HyprConfig keybindings screen](docs/assets/hyprconfig-keybindings.png)
+
 > [!WARNING]
 > HyprConfig is pre-release software. Several actions rewrite sections of your
 > Hyprland, Waybar, Rofi, Dunst, Fish, and wallpaper configuration. Writes are

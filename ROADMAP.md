@@ -17,7 +17,7 @@
 - [x] Back up and validate configuration before atomic replacement
 - [ ] Move optional theme elements behind an integration interface
 - [x] Add a supported-environment matrix
-- [ ] Add screenshots
+- [x] Add screenshots
 
 ## 0.3 — Public alpha candidate
 
