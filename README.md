@@ -5,7 +5,7 @@ keybindings, visual effects, Waybar styles, color generation, displays, and
 wallpapers in one native desktop application while continuing to use ordinary
 Hyprland configuration files as the source of truth.
 
-![HyprConfig keybindings screen](docs/assets/hyprconfig-keybindings.png)
+![HyprConfig keybindings screen](docs/assets/hyprconfig-overview.png)
 
 > [!WARNING]
 > HyprConfig is pre-release software. Several actions rewrite sections of your
