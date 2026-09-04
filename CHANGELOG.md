@@ -8,6 +8,8 @@ public release.
 
 ### Added
 
+- Local Waybar profiles: save and restore the current layout and styling,
+  including multiple bars and per-monitor workspace indicators, from the Waybar page
 - Standalone HyprConfig repository and source package
 - XDG-aware path configuration and environment overrides
 - Migration from the former `hyperconfig` state directory
@@ -21,6 +23,8 @@ public release.
 
 ### Changed
 
+- Validate both Waybar files before applying a style, retain backups, and roll
+  back file replacements if a write fails; refresh all card buttons after selection
 - Standardized all product-facing references on the `HyprConfig` name
 - Removed personal monitor mappings and absolute home-directory paths
 - Replaced system-specific public labels with generic terminology

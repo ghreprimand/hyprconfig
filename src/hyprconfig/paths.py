@@ -25,6 +25,7 @@ USERPREFS_CONF = HYPR_DIR / "userprefs.conf"
 
 WAYBAR_DIR = Path(os.environ.get("HYPRCONFIG_WAYBAR_DIR", XDG_CONFIG_HOME / "waybar"))
 WAYBAR_VARIANTS_DIR = WAYBAR_DIR / "variants"
+WAYBAR_PROFILES_DIR = APP_DIR / "waybar-profiles"
 ROFI_COLORS = XDG_CONFIG_HOME / "rofi" / "colors.rasi"
 FISH_THEME = XDG_CONFIG_HOME / "fish" / "conf.d" / "zz_hyprconfig_theme.fish"
 

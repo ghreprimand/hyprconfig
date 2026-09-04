@@ -3,16 +3,13 @@
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
-from gi.repository import Gtk, Adw, GLib
+from gi.repository import Gtk, Adw
 
-import subprocess
-from pathlib import Path
-
-from .parser import WAYBAR_DIR, WAYBAR_VARIANTS_DIR, load_state, save_state
+from .parser import WAYBAR_VARIANTS_DIR, load_state, save_state
 from .theming import restart_waybar
 from .paths import BUILTIN_VARIANTS_DIR
-from .safe_io import atomic_copy
-from .jsonc import loads as load_jsonc
+from .safe_io import UnsafeWriteError
+from .waybar_profiles import apply_setup, list_profiles, profile_dir, save_profile
 
 VARIANTS = {
     "powerline": {
@@ -152,19 +149,68 @@ class WaybarPage(Gtk.Box):
         sub.set_halign(Gtk.Align.START)
         content.append(sub)
 
+        save_panel = Gtk.Expander(label="Save current setup as a profile")
+        save_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.profile_name = Gtk.Entry(placeholder_text="Profile name", max_length=80)
+        self.profile_description = Gtk.Entry(
+            placeholder_text="Description (optional)", max_length=400)
+        save_box.append(self.profile_name)
+        save_box.append(self.profile_description)
+        note = Gtk.Label(
+            label="Saved on this device. Includes layout and styling; theme colors and "
+                  "helper files remain shared.",
+            wrap=True, xalign=0, css_classes=['page-subheader'])
+        save_box.append(note)
+        save_btn = Gtk.Button(label="Save profile", halign=Gtk.Align.START)
+        save_btn.connect('clicked', self._on_save)
+        save_box.append(save_btn)
+        save_panel.set_child(save_box)
+        content.append(save_panel)
+        self.status = Gtk.Label(wrap=True, xalign=0, visible=False)
+        content.append(self.status)
+
         # Cards
         state = load_state()
         self.current_style = state.get('waybar_style', 'powerline')
 
-        self.cards = {}
-        for variant_id, info in VARIANTS.items():
-            card = self._create_card(variant_id, info)
-            content.append(card)
-            self.cards[variant_id] = card
+        self.card_container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
+        content.append(self.card_container)
+        self._rebuild_cards()
 
         clamp.set_child(content)
         scroll.set_child(clamp)
         self.append(scroll)
+
+    def _rebuild_cards(self):
+        while child := self.card_container.get_first_child():
+            self.card_container.remove(child)
+        self.cards = {}
+        self.variants = {f"profile:{key}": info for key, info in list_profiles().items()}
+        self.variants.update(VARIANTS)
+        for variant_id, info in self.variants.items():
+            card = self._create_card(variant_id, info)
+            self.card_container.append(card)
+            self.cards[variant_id] = card
+
+    def _on_save(self, btn):
+        try:
+            profile_id = save_profile(self.profile_name.get_text(),
+                                      self.profile_description.get_text())
+            state = load_state()
+            state['waybar_style'] = f"profile:{profile_id}"
+            save_state(state)
+            self.current_style = state['waybar_style']
+        except (OSError, ValueError, UnsafeWriteError) as error:
+            self._show_status(f"Could not save profile: {error}")
+            return
+        self._rebuild_cards()
+        self.profile_name.set_text("")
+        self.profile_description.set_text("")
+        self._show_status("Profile saved on this device. Waybar is unchanged.")
+
+    def _show_status(self, text):
+        self.status.set_text(text)
+        self.status.set_visible(True)
 
     def _create_card(self, variant_id, info):
         is_active = (variant_id == self.current_style)
@@ -189,7 +235,9 @@ class WaybarPage(Gtk.Box):
             check = Gtk.Label(label="\u2713 Active", css_classes=['active-check'])
             top.append(check)
         else:
-            available = self._variant_dir(variant_id).exists()
+            directory = self._variant_dir(variant_id)
+            available = all((directory / name).is_file()
+                            for name in ('config.jsonc', 'style.css'))
             apply_btn = Gtk.Button(
                 label="Apply" if available else "Not available",
                 css_classes=['suggested-action'] if available else [],
@@ -215,51 +263,34 @@ class WaybarPage(Gtk.Box):
         return card
 
     def _on_apply(self, btn, variant_id):
-        variant_dir = self._variant_dir(variant_id)
-        if not variant_dir.exists():
+        try:
+            apply_setup(self._variant_dir(variant_id))
+        except (OSError, ValueError, UnsafeWriteError) as error:
+            self._show_status(f"Could not apply style: {error}")
             return
-
-        config_src = variant_dir / 'config.jsonc'
-        style_src = variant_dir / 'style.css'
-        config_dst = WAYBAR_DIR / 'config.jsonc'
-        style_dst = WAYBAR_DIR / 'style.css'
-
-        # Copy variant files
-        WAYBAR_DIR.mkdir(parents=True, exist_ok=True)
-        if config_src.exists():
-            load_jsonc(config_src.read_text())
-            atomic_copy(config_src, config_dst)
-        if style_src.exists():
-            atomic_copy(style_src, style_dst)
 
         # Use the same serialized, all-process restart as the Theming page.
         restart_waybar()
 
         # Update state
-        state = load_state()
-        state['waybar_style'] = variant_id
-        save_state(state)
+        try:
+            state = load_state()
+            state['waybar_style'] = variant_id
+            save_state(state)
+        except (OSError, ValueError, UnsafeWriteError) as error:
+            self._show_status(f"Style applied, but selection could not be saved: {error}")
+            return
         self.current_style = variant_id
 
-        # Update card visuals
-        self._refresh_cards()
-
-        btn.set_label("Applied \u2713")
-        btn.set_sensitive(False)
-        GLib.timeout_add(1500, lambda: (btn.set_label("Apply"), btn.set_sensitive(True)))
+        self._rebuild_cards()
+        self._show_status(f"Applied {self.variants[variant_id]['name']}.")
 
     @staticmethod
     def _variant_dir(variant_id):
         """Prefer a user-customized variant, falling back to the bundled one."""
+        if variant_id.startswith('profile:'):
+            return profile_dir(variant_id.removeprefix('profile:'))
         user_variant = WAYBAR_VARIANTS_DIR / variant_id
         if user_variant.exists():
             return user_variant
         return BUILTIN_VARIANTS_DIR / variant_id
-
-    def _refresh_cards(self):
-        """Rebuild card active states."""
-        for vid, card in self.cards.items():
-            if vid == self.current_style:
-                card.add_css_class('waybar-card-active')
-            else:
-                card.remove_css_class('waybar-card-active')
